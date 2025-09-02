@@ -10,9 +10,9 @@ namespace OTP.Model
 {
     public class UserOTP
     {
-        public string Issuer { get; set; }
-        public string Label { get; set; }
-        public string Secret { get; set; }
+        public string Issuer { get; set; } = null!;
+        public string Label { get; set; } = null!;
+        public string Secret { get; set; } = null!;
         //Generate QR code URL
         public string GenQRcodeURL() =>
             $"otpauth://totp/{Label}?issuer={Uri.EscapeDataString(Issuer)}&secret={Uri.EscapeDataString(Secret)}";

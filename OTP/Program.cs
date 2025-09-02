@@ -1,5 +1,14 @@
-var builder = WebApplication.CreateBuilder(args);
+using OTP.Model;
 
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<UserDB>(builder.Configuration.GetSection("User"));
+builder.Services.Configure<MachineDB>(builder.Configuration.GetSection("Machine"));
+
+
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("policy", builder => builder.AllowAnyMethod().AllowAnyMethod().AllowAnyOrigin());
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
