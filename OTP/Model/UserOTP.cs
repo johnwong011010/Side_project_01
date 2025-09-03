@@ -8,7 +8,7 @@ using OtpNet;
 
 namespace OTP.Model
 {
-    public class UserOTP
+    public class UserOTP : Iotp
     {
         public string Issuer { get; set; } = null!;
         public string Label { get; set; } = null!;
@@ -24,24 +24,6 @@ namespace OTP.Model
             var qrCodeData = qrGenerator.CreateQrCode(GenQRcodeURL(), QRCodeGenerator.ECCLevel.Q);
             var qrc = new PngByteQRCode(qrCodeData);
             return qrc.GetGraphic(20);
-        }
-        Totp totpInstance = null;
-        public string VaildateOTP(string code)
-        {
-            if (totpInstance == null)
-            {
-                var secretBytes = Base32Encoding.ToBytes(this.Secret);
-                totpInstance = new Totp(secretBytes);
-            }
-            long timeWindowUsed;
-            if (totpInstance.VerifyTotp(code,out timeWindowUsed))
-            {
-                return $"驗證通過 - {timeWindowUsed}";
-            }
-            else
-            {
-                return "驗證失敗";
-            }
         }
     }
 }

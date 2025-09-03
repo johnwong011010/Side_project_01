@@ -55,7 +55,16 @@ namespace OTP.Controllers
         {
             var secret = await _loginService.GetSecret(username, password);
             if (string.IsNullOrEmpty(secret)) return BadRequest("This user not need 2FA");
-
+            Totp instance = new Totp(Base32Encoding.ToBytes(secret));
+            var isValid = instance.VerifyTotp(optstring, out long timeStepMatched, new VerificationWindow(2, 2));
+            if (isValid)
+            {
+                return Ok("Verify success");
+            }
+            else
+            {
+                return BadRequest("Verify fail");
+            }
         }
     }
 }

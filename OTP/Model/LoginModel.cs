@@ -23,8 +23,8 @@ namespace OTP.Model
     public interface IRefreshTokenRepository
     {
         Task<RefreshToken?> GetByToken(string token);
-        void Add(string id,RefreshToken refreshToken);
-        void Update(string ,RefreshToken refreshToken);
+        Task Add(string id, RefreshToken token);
+        Task Update(string id, RefreshToken token);
     }
     public class RefreshTokenRequset
     {

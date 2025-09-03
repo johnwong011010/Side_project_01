@@ -1,8 +1,10 @@
 using OTP.Model;
+using OTP.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<UserDB>(builder.Configuration.GetSection("User"));
 builder.Services.Configure<MachineDB>(builder.Configuration.GetSection("Machine"));
+builder.Services.AddSingleton<LoginService>();
 
 
 builder.Services.AddCors(option =>
