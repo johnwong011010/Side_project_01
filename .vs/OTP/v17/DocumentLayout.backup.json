@@ -106,8 +106,7 @@
               "RelativeToolTip": "OTP\\Model\\UserOTP.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T08:46:12.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-01T08:46:12.713Z"
             },
             {
               "$type": "Document",
@@ -131,8 +130,7 @@
               "RelativeToolTip": "OTP\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T02:09:42.574Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-02T02:09:42.574Z"
             },
             {
               "$type": "Document",
@@ -166,7 +164,7 @@
               "RelativeDocumentMoniker": "OTP\\Controllers\\LoginController.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Controllers\\LoginController.cs",
               "RelativeToolTip": "OTP\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAAwEsAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAADUAAAAAAAAAAAAkwEsAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T09:42:24.841Z",
               "EditorCaption": ""
