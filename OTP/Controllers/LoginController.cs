@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -12,6 +14,7 @@ namespace OTP.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
+    [EnableCors("policy")]
     public class LoginController : Controller
     {
         private readonly LoginService _loginService;
@@ -19,44 +22,74 @@ namespace OTP.Controllers
         {
             _loginService = loginService;
         }
-        [HttpPost("/api/login")]
-        public async Task<ActionResult<LoginModel?>> Login(string username, string password)
+        public class LoginRequest
         {
-            var data = await _loginService.GetUser(username, password);
+            public string username { get; set; }
+            public string password { get; set; }
+        }
+        public class VerifyRequest
+        {
+            public string username { get; set; }
+            public string password { get; set; }
+            public string otpCode { get; set; }
+        }
+        [HttpPost("/api/login")]
+        public async Task<ActionResult<LoginModel?>> Login([FromBody] LoginRequest request)
+        {
+            var data = await _loginService.GetUser(request.username, request.password);
             if (data == null)
             {
                 return NotFound(data);
             }
             var message = new
             {
-                user = data,
+                username = data.Username,
+                password = request.password,
+                isDeleted = data.isDeleted,
                 status = "need verify"
             };
             string jsonString = System.Text.Json.JsonSerializer.Serialize(message);
             return Ok(jsonString);
         }
-        [HttpGet("/api/generate")]
-        public async Task<ActionResult> GenerateCode(string username, string password)
+        [HttpPost("/api/generate")]
+        public async Task<ActionResult> GenerateCode([FromBody] LoginRequest request)
         {
-            var secret = KeyGeneration.GenerateRandomKey();
-            var user = new UserOTP
+            var userSecret = await _loginService.GetSecret(request.username, request.password);
+            if (userSecret == null) 
+            { 
+                var secret = KeyGeneration.GenerateRandomKey();
+                var user = new UserOTP
+                {
+                    Issuer = "Bank",
+                    Label = "TestOTP",
+                    Secret = Base32Encoding.ToString(secret)
+                };
+                await _loginService.WriteSecret(request.username, request.password, user.Secret);
+                var qrCode = user.GenQRcode();
+                var code = Convert.ToBase64String(qrCode);
+                return Ok(code);
+            }
+            else
             {
-                Issuer = "Bank",
-                Label = "TestOTP",
-                Secret = Base32Encoding.ToString(secret)
-            };
-            await _loginService.WriteSecret(username, password, user.Secret);
-            var qrCode = user.GenQRcode();
-            var code = Convert.ToBase64String(qrCode);
-            return Ok(code);
+                var user = new UserOTP
+                {
+                    Issuer = "Bank",
+                    Label = "TestOTP",
+                    Secret = userSecret
+                };
+                var qrCode = user.GenQRcode();
+                var code = Convert.ToBase64String(qrCode);
+                return Ok(code);
+            }
         }
         [HttpPost("/api/verify")]
-        public async Task<IActionResult> VerifyLogin(string username, string password, [FromBody] string optstring)
+        public async Task<IActionResult> VerifyLogin([FromBody]VerifyRequest request)
         {
-            var secret = await _loginService.GetSecret(username, password);
-            if (string.IsNullOrEmpty(secret)) return BadRequest("This user not need 2FA");
+            var secret = await _loginService.GetSecret(request.username, request.password);
+            //if 2FA is an option, then need this code
+            //if (string.IsNullOrEmpty(secret)) return BadRequest("This user not need 2FA");
             Totp instance = new Totp(Base32Encoding.ToBytes(secret));
-            var isValid = instance.VerifyTotp(optstring, out long timeStepMatched, new VerificationWindow(2, 2));
+            var isValid = instance.VerifyTotp(request.otpCode, out long timeStepMatched, new VerificationWindow(2, 2));
             if (isValid)
             {
                 return Ok("Verify success");

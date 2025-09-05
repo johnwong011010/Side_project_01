@@ -3,19 +3,14 @@
     "ContainingType": "OTP.Controllers.LoginController",
     "Method": "GenerateCode",
     "RelativePath": "api/generate",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "username",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "password",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "OTP.Controllers.LoginController\u002BLoginRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -29,14 +24,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "username",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "password",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "request",
+        "Type": "OTP.Controllers.LoginController\u002BLoginRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": [
@@ -60,18 +50,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "username",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "password",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "optstring",
-        "Type": "System.String",
+        "Name": "request",
+        "Type": "OTP.Controllers.LoginController\u002BVerifyRequest",
         "IsRequired": true
       }
     ],

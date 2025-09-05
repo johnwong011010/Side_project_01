@@ -9,7 +9,7 @@ builder.Services.AddSingleton<LoginService>();
 
 builder.Services.AddCors(option =>
 {
-    option.AddPolicy("policy", builder => builder.AllowAnyMethod().AllowAnyMethod().AllowAnyOrigin());
+    option.AddPolicy("policy", builder => builder.AllowAnyMethod().AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
 });
 // Add services to the container.
 
@@ -27,6 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("policy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
