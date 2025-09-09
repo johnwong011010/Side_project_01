@@ -43,6 +43,22 @@
   },
   {
     "ContainingType": "OTP.Controllers.LoginController",
+    "Method": "GetCode",
+    "RelativePath": "api/noCard",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "OTP.Controllers.LoginController\u002BLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "OTP.Controllers.LoginController",
     "Method": "VerifyLogin",
     "RelativePath": "api/verify",
     "HttpMethod": "POST",

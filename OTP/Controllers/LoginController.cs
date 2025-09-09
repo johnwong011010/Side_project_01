@@ -99,5 +99,17 @@ namespace OTP.Controllers
                 return BadRequest("Verify fail");
             }
         }
+        [HttpPost("/api/noCard")]
+        public async Task<IActionResult> GetCode([FromBody] LoginRequest request)
+        {
+            var secret = await _loginService.GetSecret(request.username, request.password);
+            //create instance
+            //using created user screct,1 min per step and 8 totpsize
+            var totp = new Totp(Base32Encoding.ToBytes(secret), step: 60, totpSize: 8);
+            //recommed to use computeTotp(DateTime.UtcNow);
+            //or just use its overload -> computeTotp();
+            string fundCode = totp.ComputeTotp(DateTime.UtcNow);
+            return Ok(fundCode);
+        }
     }
 }
