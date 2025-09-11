@@ -3,24 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\OTP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\service\\machineservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\service\\machineservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\controllers\\atmcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\controllers\\atmcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\service\\loginservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\machine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\machine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\machinedb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\machinedb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\userotp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -35,16 +51,8 @@
       "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\userdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\machinedb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\machinedb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|solutionrelative:otp\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{044798DA-2DCD-4B27-BC52-EAA219DE6778}|OTP\\OTP.csproj|c:\\users\\user\\source\\repos\\otp\\otp\\otp.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
@@ -62,7 +70,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,45 +86,59 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MachineService.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Service\\MachineService.cs",
+              "RelativeDocumentMoniker": "OTP\\Service\\MachineService.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Service\\MachineService.cs",
+              "RelativeToolTip": "OTP\\Service\\MachineService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-11T09:52:35.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "Machine.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\Machine.cs",
+              "RelativeDocumentMoniker": "OTP\\Model\\Machine.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\Machine.cs",
+              "RelativeToolTip": "OTP\\Model\\Machine.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-11T09:26:34.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AtmController.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Controllers\\AtmController.cs",
               "RelativeDocumentMoniker": "OTP\\Controllers\\AtmController.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Controllers\\AtmController.cs",
               "RelativeToolTip": "OTP\\Controllers\\AtmController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-09T03:58:41.851Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\User.cs",
               "RelativeDocumentMoniker": "OTP\\Model\\User.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\User.cs",
               "RelativeToolTip": "OTP\\Model\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T02:52:54.329Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserOTP.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\UserOTP.cs",
-              "RelativeDocumentMoniker": "OTP\\Model\\UserOTP.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\UserOTP.cs",
-              "RelativeToolTip": "OTP\\Model\\UserOTP.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvxoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T08:46:12.713Z",
+              "WhenOpened": "2025-09-02T02:52:54.329Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\appsettings.json",
               "RelativeDocumentMoniker": "OTP\\appsettings.json",
@@ -129,7 +151,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Program.cs",
               "RelativeDocumentMoniker": "OTP\\Program.cs",
@@ -142,19 +164,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "LoginModel.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\LoginModel.cs",
               "RelativeDocumentMoniker": "OTP\\Model\\LoginModel.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\LoginModel.cs",
               "RelativeToolTip": "OTP\\Model\\LoginModel.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAA0wBgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAzwBgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-01T10:16:07.85Z"
+              "WhenOpened": "2025-09-01T10:16:07.85Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "LoginService.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Service\\LoginService.cs",
               "RelativeDocumentMoniker": "OTP\\Service\\LoginService.cs",
@@ -167,20 +190,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "OTP\\Controllers\\LoginController.cs",
               "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Controllers\\LoginController.cs",
               "RelativeToolTip": "OTP\\Controllers\\LoginController.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAAAAGAAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAmwBMAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-01T09:42:24.841Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
+              "Title": "MachineDB.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\MachineDB.cs",
+              "RelativeDocumentMoniker": "OTP\\Model\\MachineDB.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\MachineDB.cs",
+              "RelativeToolTip": "OTP\\Model\\MachineDB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-02T02:38:37.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserOTP.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\UserOTP.cs",
+              "RelativeDocumentMoniker": "OTP\\Model\\UserOTP.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\UserOTP.cs",
+              "RelativeToolTip": "OTP\\Model\\UserOTP.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAADwvxoAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-01T08:46:12.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "UserDB.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\UserDB.cs",
               "RelativeDocumentMoniker": "OTP\\Model\\UserDB.cs",
@@ -193,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Iotp.cs",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\Iotp.cs",
               "RelativeDocumentMoniker": "OTP\\Model\\Iotp.cs",
@@ -206,19 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "MachineDB.cs",
-              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\MachineDB.cs",
-              "RelativeDocumentMoniker": "OTP\\Model\\MachineDB.cs",
-              "ToolTip": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\Model\\MachineDB.cs",
-              "RelativeToolTip": "OTP\\Model\\MachineDB.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T02:38:37.025Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "OTP.http",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\OTP.http",
               "RelativeDocumentMoniker": "OTP\\OTP.http",
@@ -226,11 +263,12 @@
               "RelativeToolTip": "OTP\\OTP.http",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-09-02T02:13:23.364Z"
+              "WhenOpened": "2025-09-02T02:13:23.364Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "OTP.csproj",
               "DocumentMoniker": "C:\\Users\\User\\source\\repos\\OTP\\OTP\\OTP.csproj",
               "RelativeDocumentMoniker": "OTP\\OTP.csproj",
@@ -238,7 +276,8 @@
               "RelativeToolTip": "OTP\\OTP.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-01T09:56:35.956Z"
+              "WhenOpened": "2025-09-01T09:56:35.956Z",
+              "EditorCaption": ""
             }
           ]
         }
