@@ -1,10 +1,42 @@
+using Confluent.Kafka;
+using Microsoft.Extensions.Options;
 using OTP.Model;
 using OTP.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<UserDB>(builder.Configuration.GetSection("User"));
 builder.Services.Configure<MachineDB>(builder.Configuration.GetSection("Machine"));
+builder.Services.Configure<KafkaProducer>(builder.Configuration.GetSection("Producer"));
+builder.Services.Configure<KafkaConsumer>(builder.Configuration.GetSection("Consumer"));
+builder.Services.AddSingleton<IProducer<Null, String>>(sp =>
+{
+    var config = sp.GetRequiredService<IOptionsMonitor<KafkaProducer>>().CurrentValue;
+    var producerConfig = new ProducerConfig
+    {
+        BootstrapServers = config.BootstrapServers,
+        MessageSendMaxRetries = config.MessageSendMaxRetries,
+        RetryBackoffMs = config.RetryBackoffMs,
+        LingerMs = config.LingerMs,
+        BatchSize = config.BatchSize
+    };
+    return new ProducerBuilder<Null, string>(producerConfig).Build();
+});
+builder.Services.AddSingleton<IConsumer<Null, string>>(sc =>
+{
+    var config = sc.GetRequiredService<IOptionsMonitor<KafkaConsumer>>().CurrentValue;
+    var consumerConfig = new ConsumerConfig
+    {
+        BootstrapServers = config.BootstrapServers,
+        GroupId = config.GroupId,
+        AutoOffsetReset = (AutoOffsetReset)config.AutoOffsetReset,
+        EnableAutoCommit = config.EnableAutoCommit,
+        MaxPollIntervalMs = config.MaxPollIntervalMs,
+        SessionTimeoutMs = config.SessionTimeoutMs
+    };
+    return new ConsumerBuilder<Null, string>(consumerConfig).Build();
+});
 builder.Services.AddSingleton<LoginService>();
+builder.Services.AddSingleton<MachineService>();
 
 
 builder.Services.AddCors(option =>
