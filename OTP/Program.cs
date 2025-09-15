@@ -2,8 +2,18 @@ using Confluent.Kafka;
 using Microsoft.Extensions.Options;
 using OTP.Model;
 using OTP.Service;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+// using C# console logging
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+// using Serilog for logging
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 builder.Services.Configure<UserDB>(builder.Configuration.GetSection("User"));
 builder.Services.Configure<MachineDB>(builder.Configuration.GetSection("Machine"));
 builder.Services.Configure<KafkaProducer>(builder.Configuration.GetSection("Producer"));
