@@ -16,6 +16,7 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 builder.Services.Configure<UserDB>(builder.Configuration.GetSection("User"));
 builder.Services.Configure<MachineDB>(builder.Configuration.GetSection("Machine"));
+builder.Services.Configure<RequestDB>(builder.Configuration.GetSection("Request"));
 builder.Services.Configure<KafkaProducer>(builder.Configuration.GetSection("Producer"));
 builder.Services.Configure<KafkaConsumer>(builder.Configuration.GetSection("Consumer"));
 builder.Services.AddSingleton<IProducer<Null, String>>(sp =>
@@ -47,6 +48,7 @@ builder.Services.AddSingleton<IConsumer<Null, string>>(sc =>
 });
 builder.Services.AddSingleton<LoginService>();
 builder.Services.AddSingleton<MachineService>();
+builder.Services.AddSingleton<RequestService>();
 
 
 builder.Services.AddCors(option =>

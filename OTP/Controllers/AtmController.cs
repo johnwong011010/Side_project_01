@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OTP.Service;
 using Confluent.Kafka;
 using OtpNet;
+using OTP.Model;
 
 namespace OTP.Controllers
 {
@@ -12,12 +13,14 @@ namespace OTP.Controllers
     public class AtmController : Controller
     {
         private readonly LoginService _loginService;
+        private readonly RequestService _requestService;
         private readonly IProducer<Null, string> _producer;
         private readonly IConsumer<Null, string> _consumer;
         private readonly ILogger<AtmController> _logger;
-        public AtmController(LoginService loginService, IProducer<Null, string> producer, IConsumer<Null, string> consumer, ILogger<AtmController> logger)
+        public AtmController(LoginService loginService, RequestService requestService, IProducer<Null, string> producer, IConsumer<Null, string> consumer, ILogger<AtmController> logger)
         {
             _loginService = loginService;
+            _requestService = requestService;
             _producer = producer;
             _consumer = consumer;
             _logger = logger;
@@ -34,6 +37,16 @@ namespace OTP.Controllers
             public string machine_code { get; set; } = null!;
             public string machine_name { get; set; } = null!;
             public string location { get; set; } = null!;
+        }
+        public class MessageFormat
+        {
+            public string Key { get; set; }
+            public string username { get; set; }
+            public string password { get; set; }
+            public string account { get; set; }
+            public int denomination { get; set; }
+            public string code { get; set; }
+            public DateTime requestTime { get; set; }
         }
         [HttpPost("/api/[controller]/Code")]
         public async Task<ActionResult> GenerateCode([FromBody] GenerateRequest request)
@@ -64,6 +77,14 @@ namespace OTP.Controllers
             {
                 await _producer.ProduceAsync("pending", kafkaMessage);
                 _logger.LogInformation("Produced message to Kafka topic 'pending' for user: {Username}", request.username);
+                await _requestService.AddRequest(new Model.NoCardRequest
+                {
+                    username = request.username,
+                    account = request.account,
+                    denomination = request.denominations,
+                    verify_code = code,
+                    Finished = false
+                });
                 return Ok(new { Code = code, Status = "pending" });
             }
             catch (ProduceException<string,string> e)
@@ -85,8 +106,6 @@ namespace OTP.Controllers
             }
             else
             {
-                //start consume message from pending to receive the otp code
-                _consumer.Subscribe("pending");
             }
         }
     }
