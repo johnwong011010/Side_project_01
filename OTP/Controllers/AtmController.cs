@@ -4,6 +4,7 @@ using OTP.Service;
 using Confluent.Kafka;
 using OtpNet;
 using OTP.Model;
+using System.Reflection.Metadata.Ecma335;
 
 namespace OTP.Controllers
 {
@@ -32,21 +33,42 @@ namespace OTP.Controllers
             public string account { get; set; }
             public int denominations { get; set; }
         }
-        public class MachineData
+        public class AtmInput 
         {
-            public string machine_code { get; set; } = null!;
-            public string machine_name { get; set; } = null!;
-            public string location { get; set; } = null!;
+            public string username { get; set; } = null!;
+            public string account { get; set; } = null!;
+            public string code { get; set; } = null!;
         }
-        public class MessageFormat
+        private IConsumer<Null, string> CreatePrivateConsumer()
         {
-            public string Key { get; set; }
-            public string username { get; set; }
-            public string password { get; set; }
-            public string account { get; set; }
-            public int denomination { get; set; }
-            public string code { get; set; }
-            public DateTime requestTime { get; set; }
+            var config = new ConsumerConfig
+            {
+                GroupId = $"validation-group-{Guid.NewGuid()}",
+                BootstrapServers = "localhost:9092",
+                AutoOffsetReset = AutoOffsetReset.Latest,
+                EnableAutoCommit = false,
+                EnableAutoOffsetStore = false,
+                IsolationLevel = IsolationLevel.ReadCommitted
+            };
+            return new ConsumerBuilder<Null, string>(config).Build();
+        }
+        private async Task<ConsumeResult<Null, string>> FindMatchMessage(IConsumer<Null, string> consumer, AtmInput input, TimeSpan timeSpan)
+        {
+            var time = DateTime.UtcNow;
+            while (DateTime.UtcNow - time < timeSpan)
+            {
+                try
+                {
+                    var consumeResult = consumer.Consume(TimeSpan.FromSeconds(30));
+                    if (consumeResult == null || consumeResult.IsPartitionEOF)
+                    {
+                        continue;
+                    }
+                    var message = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(consumeResult.Message.Value);
+                    if (message == null) continue;
+                    if (message.TryGetValue("Username",out object name))
+                }
+            }
         }
         [HttpPost("/api/[controller]/Code")]
         public async Task<ActionResult> GenerateCode([FromBody] GenerateRequest request)
@@ -69,7 +91,8 @@ namespace OTP.Controllers
                 Password = request.password,
                 Account = request.account,
                 Denominations = request.denominations,
-                Code = code
+                Code = code,
+                Status = "pending"
             };
             var messageString = System.Text.Json.JsonSerializer.Serialize(message);
             var kafkaMessage = new Message<Null, string> { Value = messageString };
@@ -77,14 +100,6 @@ namespace OTP.Controllers
             {
                 await _producer.ProduceAsync("pending", kafkaMessage);
                 _logger.LogInformation("Produced message to Kafka topic 'pending' for user: {Username}", request.username);
-                await _requestService.AddRequest(new Model.NoCardRequest
-                {
-                    username = request.username,
-                    account = request.account,
-                    denomination = request.denominations,
-                    verify_code = code,
-                    Finished = false
-                });
                 return Ok(new { Code = code, Status = "pending" });
             }
             catch (ProduceException<string,string> e)
@@ -94,19 +109,27 @@ namespace OTP.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
-        [HttpPost("/api/[controller]/message")]
-        public async Task<ActionResult> StartConsume([FromBody] MachineData data)
+        //in machine login
+        [HttpPost("/api/[controller]/userdata")]
+        public async Task<ActionResult> Login(string username, string password)
         {
-            // Validate machine data
-            // in real solution, it should have a format check.
-            if (data.machine_code == null || data.machine_name == null || data.location == null)
+            var searchResult = await _loginService.GetUser(username, password);
+            if (searchResult == null)
             {
-                _logger.LogError("Not ATM request received.");
-                return Unauthorized("Not ATM request");
+                return NotFound("User not found");
             }
             else
             {
+                return Ok("choose action");
             }
         }
+        //[HttpPost("/api/[controller]/codeVaildation")]
+        //public async Task<ActionResult> ConsumeFromApproved([FromBody] AtmInput input)
+        //{
+        //    _logger.LogInformation("Start Consume to Kafka:{username}-{account}", input.username, input.account);
+        //    using var consumer = CreatePrivateConsumer();
+        //    consumer.Subscribe("approved");
+        //    var matchMessage = await FindMatchMessage(consumer, input, TimeSpan.FromMinutes(10));
+        //}
     }
 }
