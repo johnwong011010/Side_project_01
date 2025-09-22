@@ -12,6 +12,8 @@ namespace OTP.Service
             var database = client.GetDatabase(monitor.CurrentValue.DatabaseName);
             _collection = database.GetCollection<Model.NoCardRequest>(monitor.CurrentValue.CollectionName);
         }
+        //find the request by account, username, code and not finished
+        public async Task<Model.NoCardRequest?> GetOneRequest(string account, string username, string code) => await _collection.Find(x => x.account == account && x.username == username && x.verify_code == code && x.Finished == false).FirstOrDefaultAsync();
         public async Task<List<Model.NoCardRequest>> GetAllRequests() => await _collection.Find(_ => true).ToListAsync();
         public async Task<List<Model.NoCardRequest>> GetRequestByUser(string username) => await _collection.Find(x => x.username == username).ToListAsync();
         public async Task<List<Model.NoCardRequest>> GetRequestByAccount(string account) => await _collection.Find(x => x.account == account).ToListAsync();

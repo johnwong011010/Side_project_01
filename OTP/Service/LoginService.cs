@@ -14,6 +14,7 @@ namespace OTP.Service
             var database = client.GetDatabase(UserMonitor.CurrentValue.DatabaseName);
             _collection = database.GetCollection<User>(UserMonitor.CurrentValue.CollectionName);
         }
+        public async Task<User> GetUserByBid(string id) => await _collection.Find(x => x._id == id).FirstOrDefaultAsync();
         public async Task<User?> GetUser(string Username, string Password) => await _collection.Find(x => x.Username == Username && x.Password == Password).FirstOrDefaultAsync(); 
         public async Task AddUser(string Username, string Password) => await _collection.InsertOneAsync(new User { Username = Username, Password = Password, isDeleted=false });
         public async Task DeleteUser(string Username, string Password) => await _collection.UpdateOneAsync(x => x.Username == Username && x.Password == Password, Builders<User>.Update.Set("isDeleted", true));

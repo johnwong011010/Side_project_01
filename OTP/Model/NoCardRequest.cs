@@ -10,6 +10,8 @@ namespace OTP.Model
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         [Required]
+        public string uID { get; set; }
+        [Required]
         public string verify_code { get; set; }
         [Required]
         public int denomination { get; set; }

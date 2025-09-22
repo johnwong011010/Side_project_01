@@ -39,41 +39,12 @@ namespace OTP.Controllers
             public string account { get; set; } = null!;
             public string code { get; set; } = null!;
         }
-        private IConsumer<Null, string> CreatePrivateConsumer()
-        {
-            var config = new ConsumerConfig
-            {
-                GroupId = $"validation-group-{Guid.NewGuid()}",
-                BootstrapServers = "localhost:9092",
-                AutoOffsetReset = AutoOffsetReset.Latest,
-                EnableAutoCommit = false,
-                EnableAutoOffsetStore = false,
-                IsolationLevel = IsolationLevel.ReadCommitted
-            };
-            return new ConsumerBuilder<Null, string>(config).Build();
-        }
-        private async Task<ConsumeResult<Null, string>> FindMatchMessage(IConsumer<Null, string> consumer, AtmInput input, TimeSpan timeSpan)
-        {
-            var time = DateTime.UtcNow;
-            while (DateTime.UtcNow - time < timeSpan)
-            {
-                try
-                {
-                    var consumeResult = consumer.Consume(TimeSpan.FromSeconds(30));
-                    if (consumeResult == null || consumeResult.IsPartitionEOF)
-                    {
-                        continue;
-                    }
-                    var message = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(consumeResult.Message.Value);
-                    if (message == null) continue;
-                    if (message.TryGetValue("Username",out object name))
-                }
-            }
-        }
         [HttpPost("/api/[controller]/Code")]
         public async Task<ActionResult> GenerateCode([FromBody] GenerateRequest request)
         {
             var secret = await _loginService.GetSecret(request.username, request.password);
+            var user = await _loginService.GetUser(request.username, request.password);
+            string id = user._id;
             if (secret == null) 
             { 
                 _logger.LogWarning("User not found or secret not set for user: {Username}", request.username);
@@ -87,6 +58,7 @@ namespace OTP.Controllers
             {
                 Key = Guid.NewGuid().ToString(),
                 Timestamp = DateTime.UtcNow,
+                ID = id,
                 Username = request.username,
                 Password = request.password,
                 Account = request.account,
@@ -123,13 +95,43 @@ namespace OTP.Controllers
                 return Ok("choose action");
             }
         }
-        //[HttpPost("/api/[controller]/codeVaildation")]
-        //public async Task<ActionResult> ConsumeFromApproved([FromBody] AtmInput input)
-        //{
-        //    _logger.LogInformation("Start Consume to Kafka:{username}-{account}", input.username, input.account);
-        //    using var consumer = CreatePrivateConsumer();
-        //    consumer.Subscribe("approved");
-        //    var matchMessage = await FindMatchMessage(consumer, input, TimeSpan.FromMinutes(10));
-        //}
+        [HttpPost("/api/[controller]/codeVaildation")]
+        public async Task<ActionResult> NoCardFund([FromBody] AtmInput input)
+        {
+            //check the input vaild code 
+            if (String.IsNullOrEmpty(input.code))
+            {
+                _logger.LogWarning("User enter Invaild code: {code}", input.code);
+                return BadRequest("No verify code detected");
+            }
+            else if (input.code.Length == 0 || input.code.Length < 8 || !input.code.All(char.IsDigit))
+            {
+                _logger.LogCritical("User input a worth code");
+                return BadRequest("Invaild code");
+            }
+            var request = await _requestService.GetOneRequest(input.account, input.username, input.code);
+            if (request == null)
+            {
+                _logger.LogWarning("User doing Invaild request");
+                return BadRequest("Invaild request");
+            }
+            else
+            {
+                //check the verify code first
+                var user = await _loginService.GetUserByBid(request.uID);
+                Totp totp = new Totp(Base32Encoding.ToBytes(user.Secret));
+                var isVaild = totp.VerifyTotp(input.code, out long timeStepMatched);
+                if (isVaild)
+                {
+                    _logger.LogCritical("User {Username} successfully withdraw {Denominations} from account {Account}", input.username, request.denomination, input.account);
+                    return Ok($"Success withdraw {request.denomination} from account {input.account}");
+                }
+                else
+                {
+                    _logger.LogInformation("User enter a outdate code");
+                    return BadRequest("Outdate code");
+                }
+            }
+        }
     }
 }
