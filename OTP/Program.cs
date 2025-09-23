@@ -46,6 +46,8 @@ builder.Services.AddSingleton<IConsumer<Null, string>>(sc =>
     };
     return new ConsumerBuilder<Null, string>(consumerConfig).Build();
 });
+//adding a background service to handle kafka message
+builder.Services.AddHostedService<KafkaService>();
 builder.Services.AddSingleton<LoginService>();
 builder.Services.AddSingleton<MachineService>();
 builder.Services.AddSingleton<RequestService>();

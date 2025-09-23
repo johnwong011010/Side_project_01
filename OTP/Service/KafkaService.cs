@@ -36,11 +36,13 @@ namespace OTP.Service
                             //do checklist to confirm this request is safe and vaild.
                             //after check, put this request to approved or reject topic
                             await DoChecklist(consumeResult.Message.Value);
+                            _consumer.Commit(consumeResult);
                             // Process pending message
                             break;
                         case "reject":
                             _logger.LogInformation("Rejected message received: {message}", consumeResult.Message.Value);
                             await SendRejectMessage();
+                            _consumer.Commit(consumeResult);
                             break;
                         case "approved":
                             //log the approved message
@@ -48,6 +50,11 @@ namespace OTP.Service
                             //save the approved message to mongoDB
                             var message = System.Text.Json.JsonSerializer.Deserialize<Model.NoCardRequest>(consumeResult.Message.Value);
                             _collection.InsertOne(message);
+                            _consumer.Commit(consumeResult);
+                            break;
+                        case "completed":
+                            _logger.LogInformation("Completed message received: {message}", consumeResult.Message.Value);
+                            _consumer.Commit(consumeResult);
                             break;
                         default:
                             _logger.LogWarning("Unknown topic: {topic}", consumeResult.Topic);
