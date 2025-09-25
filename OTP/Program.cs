@@ -1,5 +1,7 @@
 using Confluent.Kafka;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using OTP.Model;
 using OTP.Service;
 using Serilog;
@@ -46,11 +48,27 @@ builder.Services.AddSingleton<IConsumer<Null, string>>(sc =>
     };
     return new ConsumerBuilder<Null, string>(consumerConfig).Build();
 });
+var jwtSetting = builder.Configuration.GetSection("JWT");
 //adding a background service to handle kafka message
 builder.Services.AddHostedService<KafkaService>();
 builder.Services.AddSingleton<LoginService>();
 builder.Services.AddSingleton<MachineService>();
 builder.Services.AddSingleton<RequestService>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtSetting["Issuer"],
+            //ValidAudience = jwtSetting["Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(jwtSetting["Key"]))
+        };
+    });
 
 
 builder.Services.AddCors(option =>
@@ -76,6 +94,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors("policy");
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
