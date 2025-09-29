@@ -13,5 +13,6 @@ namespace OTP.Model
         public string Password { get; set; }
         public bool isDeleted { get; set; }
         public string? Secret { get; set; }
+        public RefreshToken? RefreshToken { get; set; }
     }
 }

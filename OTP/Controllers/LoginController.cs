@@ -10,6 +10,10 @@ using OTP.Model;
 using OTP.Service;
 using OtpNet;
 using QRCoder;
+using BCrypt.Net;
+using System.Security.Claims;
+using OTP.Interface;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace OTP.Controllers
@@ -20,9 +24,14 @@ namespace OTP.Controllers
     public class LoginController : Controller
     {
         private readonly LoginService _loginService;
-        public LoginController(LoginService loginService)
+        private readonly IConfiguration _configuration;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        public LoginController(LoginService loginService, IConfiguration configuration, IRefreshTokenRepository refreshTokenRepository)
         {
             _loginService = loginService;
+            //load JWT setting
+            _configuration = configuration;
+            _refreshTokenRepository = refreshTokenRepository;
         }
         public class LoginRequest
         {
@@ -38,6 +47,10 @@ namespace OTP.Controllers
         [HttpPost("/api/user")]
         public async Task<ActionResult<LoginModel?>> Login([FromBody] LoginRequest request)
         {
+            //for testing purpose, not hash the password
+            //In real case, the password should be hashed when store in DB
+            //And the password here should be hashed before compare with DB
+            //request.password = BCrypt.Net.BCrypt.HashPassword(request.password);
             var data = await _loginService.GetUser(request.username, request.password);
             if (data == null)
             {
@@ -100,6 +113,40 @@ namespace OTP.Controllers
             {
                 return BadRequest("Verify fail");
             }
+        }
+        private string GenerateJwtToken(string username)
+        {
+            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, username),
+                new Claim(ClaimTypes.Role, "logged user")
+            };
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:Issuer"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(10),
+                signingCredentials: credentials);
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+        private async Task<RefreshToken> GenerateRefreshToken(string requestIP,string id)
+        {
+            var refreshToken = new RefreshToken
+            {
+                Id = Guid.NewGuid().ToString(),
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                CreateIP = requestIP,
+                CreateAt = DateTime.UtcNow,
+                Expire = DateTime.UtcNow.AddDays(7)
+            };
+            await _refreshTokenRepository.AddRefreshToken(id, refreshToken);
+            return refreshToken;
+        }
+        private async Task<AuthResponse> Refresh(RefreshRequest request)
+        {
+            var user = await _loginService.GetUserByBid(request.id);
+            DateTime time = DateTime.UtcNow;
         }
     }
 }
