@@ -46,6 +46,7 @@ namespace OTP.Model
     public class RefreshRequest
     {
         public string id { get; set; } = null!;
+        public string RequestIP { get; set; } = null!;
         public string Token { get; set; } = null!;
         public RefreshToken RefreshToken { get; set; } = null!;
     }

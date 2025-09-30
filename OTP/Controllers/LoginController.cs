@@ -15,6 +15,7 @@ using System.Security.Claims;
 using OTP.Interface;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Routing;
 
 namespace OTP.Controllers
 {
@@ -143,10 +144,18 @@ namespace OTP.Controllers
             await _refreshTokenRepository.AddRefreshToken(id, refreshToken);
             return refreshToken;
         }
-        private async Task<AuthResponse> Refresh(RefreshRequest request)
+        private async Task<AuthResponse> RefreshAccess(RefreshRequest request)
         {
-            var user = await _loginService.GetUserByBid(request.id);
-            DateTime time = DateTime.UtcNow;
+            var vp = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                RequireExpirationTime = true,
+                ValidateLifetime = true
+            };
+            try
+            {
+                var token = new JwtSecurityTokenHandler().ValidateToken(request.Token, vp, out SecurityToken validatedToken);
+            }
         }
     }
 }
